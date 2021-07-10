@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,13 +11,13 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
     <link href="/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     
-    <link href="Login.css" rel="stylesheet">
+    <link href="{% static 'css/Login.css' %}" rel="stylesheet">
 </head>
 <body class="text-center">
     
     <main class="form-signin">
       <form>
-        <img class="mb-4" src="logoHT1.png" alt="" width="72" height="57">
+        <img class="mb-4" src="{% static 'logoHT1.png' %}" alt="Help Together" width="72" height="57">
         <h1 class="h2 mb-3 fw-normal">Login</h1>
     
         <div class="form-floating">
@@ -33,7 +34,7 @@
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Log In</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
       </form>
     </main>
