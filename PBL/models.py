@@ -14,5 +14,5 @@ class Profile(models.Model):
                               
      
     def __str__(self):
-        return self.userId
+        return str(self.pk)
 

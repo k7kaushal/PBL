@@ -41,7 +41,7 @@ def Register(request):
 
         newUser = User.objects.create_user(username=fname, email=email, first_name=fname, last_name=lname, password=password1)
                                            
-        profile = Profile(user=newUser, phone=phone, gender=gender, city=city, year=year)
+        profile = Profile.objects.create(userId=newUser, phone=phone, gender=gender, city=city, year=year)
 
         profile.save()
         newUser.save()
