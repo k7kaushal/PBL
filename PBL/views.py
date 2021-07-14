@@ -4,8 +4,10 @@ from django.contrib import auth, messages
 from .models import Profile
 from .models import Post
 
+
 def cover(request):
     return render(request, "PBL/cover.html")
+
 
 def Login(request):
      if request.method == 'POST':
@@ -16,12 +18,12 @@ def Login(request):
         user = auth.authenticate(request, email=email, password=password)
 
         if user is not None:
-            messages.error(request, 'Invalid credentials.')
-            return redirect('Login')
+             auth.login(request, user)
+             return redirect('user-home')
             
         else:
-            auth.login(request, user)
-            return redirect('user-home')
+            messages.error(request, 'Invalid credentials.')
+            return redirect('Login')
 
      return render(request, "PBL/Login.html")
 
@@ -97,9 +99,10 @@ def addpost(request):
 
 def posts(request):
     context = {
-        'posts': Post.objects.all()
-    }
-    context1 = {
+        'posts': Post.objects.all(),
         'users': Profile.objects.all()
     }
-    return render(request, 'PBL/posts.html', context, context1)
+    # context1 = {
+    #     'users': Profile.objects.all()
+    # }
+    return render(request, 'PBL/posts.html', context)

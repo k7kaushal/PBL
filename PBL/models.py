@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.http import request
+from django.utils import timezone 
+
 
 class Profile(models.Model):
     year_choices = [('FE','FE') , ('SE','SE'),('TE','TE'), ('BE','BE')]
@@ -20,6 +22,7 @@ class Post(models.Model):
     type_choices = [('Stationary','Stationary') , ('Notes','Notes'),('Help in Project','Help in Project'), ('Other','Other')]
     request1 = models.CharField(default='', max_length=100, null=True)
     type = models.CharField(default='', max_length=20,null=True, choices=type_choices)
+    date_posted = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return str(self.pk)

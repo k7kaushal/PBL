@@ -38,7 +38,7 @@
             </div>
         </header>
 
-        <main class="px-3">
+        
           {% for post in posts %}
           <article class="media content-section">
             <div class="media-body">
@@ -46,12 +46,12 @@
                 
                 <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
               </div>
-              <h2><a class="article-title" href="#">{{ post.type }}</a></h2>
+              <h4>{{ post.type }}</h4>
               <p class="article-content">{{ post.request1 }}</p>
             </div>
         </article>
         {% endfor %}
-        </main>
+        
 
         <footer class="mt-auto text-white-50">
             <div><h4>Contact Us at</h4> <a href="edummy610@gmail" class="text-white">edummy610@gmail.com</a></div>
