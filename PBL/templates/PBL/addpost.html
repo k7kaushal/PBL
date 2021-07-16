@@ -32,7 +32,7 @@
                         <a class="nav-link " aria-current="page" href="#">Home</a>
                         <a class="nav-link" href="{% url 'addpost' %}">Add Post</a>
                         <a class="nav-link" href="{% url 'posts' %}">Public Posts</a>
-                        <a class="nav-link" href="#">About us</a>
+                        <a class="nav-link" href="{% url 'About' %}">About us</a>
                         <a class="nav-link" href="#">Profile</a>
                         <a class="nav-link" href="{% url 'logout' %}">Log out</a>
                     </nav>
@@ -43,14 +43,21 @@
             <h1>Add Post</h1>
             <form method="POST">
                 {% csrf_token %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <b>{{ message }}</b>
+                    <br>
+                    <br>
+                    {% endfor %}
+                {% endif %}
                 {{ form.as_p}}
-                <div class="col-md-6">
-                    <div class="col-md-6">
-                        <div class="form-group">
+                <div class="container">
+                    <div class="">
+                        <div class="">
                             <input type="text" class="form-control" placeholder="Enter your request" value=""
                                 name="request1" id="request1" />
                         </div>
-                        <div class="form-group">
+                        <div class="">
                             <select class="form-control" name="type" id="type">
                                 <option class="hidden" selected disabled>Type of request
                                 </option>
@@ -61,7 +68,7 @@
                             </select>
                         </div>
 
-                        <button class="btn btn-secondary">Post</button>
+                        <button class="btn btn-primary">Post</button>
             </form>
         </main>
 

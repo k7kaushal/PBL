@@ -14,16 +14,20 @@ def Login(request):
 
         email = request.POST.get('email')
         password = request.POST.get('password')
+        print(email)
+        print(password)
 
-        user = auth.authenticate(request, email=email, password=password)
+        user = auth.authenticate(request, username=email, password=password)
 
         if user is not None:
-             auth.login(request, user)
-             return redirect('user-home')
+            auth.login(request, user)
+            return redirect('user-home')
+            
             
         else:
             messages.error(request, 'Invalid credentials.')
             return redirect('Login')
+        
 
      return render(request, "PBL/Login.html")
 
@@ -59,14 +63,14 @@ def Register(request):
 
         newUser = User.objects.create_user(username=email, email=email, first_name=fname, last_name=lname, password=password1)
                                            
-        profile = Profile.objects.create(userId=newUser,fname=fname, lname=lname, email=email, phoneNo= phone, gender=gender, city=city, year=year,)
+        profile = Profile.objects.create(userId=newUser, phoneNo= phone, gender=gender, city=city, year=year)
 
         profile.save()
         newUser.save()
 
         messages.success(request, 'Account created successfully.')
 
-        return render(request, 'Login')
+        return render(request, 'PBL/Login.html')
         messages.success(request, 'Account created successfully.')
 
     return render(request, "users/register.html")                
@@ -76,6 +80,8 @@ def Register(request):
         # return render(request, "users/register.html")
 def userHome(request):
     return render(request, 'PBL/user-home.html')
+def About(request):
+    return render(request, 'PBL/About.html')
 
 def logout(request):
     auth.logout(request)
@@ -91,18 +97,16 @@ def addpost(request):
 
         post.save()
 
-        messages.success(request, 'Request sent successfully.')
+        messages.success(request, 'Request sent successfully. Please go to Public posts to see your request!')
 
-        return render(request, 'PBL/posts.html')
+        return render(request, 'PBL/addpost.html')
 
     return render(request, 'PBL/addpost.html')
 
 def posts(request):
+    current_user=request.user
     context = {
         'posts': Post.objects.all(),
-        'users': Profile.objects.all()
+        'users': User.objects.all()
     }
-    # context1 = {
-    #     'users': Profile.objects.all()
-    # }
     return render(request, 'PBL/posts.html', context)
